@@ -1,0 +1,25 @@
+<launch>
+	<arg name="name" default="test"/>
+	<arg name="record" default="0"/>
+	<group if="$(arg record)">
+		<node pkg="rosbag" type="record" name="record" output="screen" args="--split=1024 -a -o $(arg rec)"/>
+	</group>	
+	<group ns="xsens">
+		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
+		<node pkg="xsens_driver" type="mtnode.py" name="mtnode">
+			<param name="device" value="/dev/ttyUSB1" />
+			<param name="baudrate" value="115200" />
+			<param name="frame_id" value="base_footprint" />
+			<remap from="/imu/data" to="imu/data"/>
+		</node>
+	</group>
+	
+	
+	<group ns="mst">
+		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
+		<node name="mst" pkg="microstrain_3dmgx2_imu" type="imu_node">
+			<param name="port" value="/dev/ttyUSB0" />		
+		</node>
+	</group>
+	
+</launch>
