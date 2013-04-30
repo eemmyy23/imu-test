@@ -29,8 +29,6 @@ void resetInitialValues(double r,double p,double y)
 	ROS_INFO("Current orientation: %lf %lf %lf",degrees(iR),degrees(iP),degrees(iY));
 }
 
-
-
 double delta (double initial, double final)
 {
 	double d = final - initial;
