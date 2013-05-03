@@ -9,7 +9,7 @@
 	<group ns="xsens">
 		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
 		<node pkg="xsens_driver" type="mtnode.py" name="mtnode">
-			<param name="device" value="/dev/ttyUSB1" />
+			<param name="device" value="/dev/ttyUSB0" />
 			<param name="baudrate" value="115200" />
 			<param name="frame_id" value="base_footprint" />
 			<remap from="/imu/data" to="imu/data"/>
@@ -17,13 +17,13 @@
 	</group>
 	
 	
-	<group ns="mst">
+<!--	<group ns="mst">
 		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
 		<node name="mst" pkg="microstrain_3dmgx2_imu" type="imu_node">
 			<param name="port" value="/dev/ttyUSB0" />		
 		</node>
 	</group>
-
+-->
 
 	<group ns="trivisio">
 		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />

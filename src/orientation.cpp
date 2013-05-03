@@ -32,10 +32,10 @@ void resetInitialValues(double r,double p,double y)
 double delta (double initial, double final)
 {
 	double d = final - initial;
-	if (final - initial < 0)
-		d += M_PI_2;
+	if (d < 0)
+		d += 2.0 * M_PI;
 	if (d > M_PI)
-		d -= M_PI_2;
+		d -= 2.0 * M_PI;
 	return d;
 }
 
