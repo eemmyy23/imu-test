@@ -4,15 +4,21 @@
 <launch>
 	<arg name="rec" default="0"/>
 	<group if="$(arg rec)">
-		<node pkg="rosbag" type="record" name="record" output="screen" args="--split --duration=600 -a"/>
+		<node pkg="rosbag" type="record" name="record" args="--split --duration=600 -a"/>
 	</group>	
 	<group ns="xsens">
-		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
+		<node name="orientation" pkg="imu-test" type="orientation_node" />
 		<node pkg="xsens_driver" type="mtnode.py" name="mtnode">
 			<param name="device" value="/dev/ttyUSB0" />
 			<param name="baudrate" value="115200" />
 			<param name="frame_id" value="base_footprint" />
 			<remap from="/imu/data" to="imu/data"/>
+			<remap from="/fix" to="fix"/>
+			<remap from="/fix_extended" to="fix_extended"/>
+			<remap from="/magnetic" to="magnetic"/>
+			<remap from="/temperature" to="temperature"/>
+			<remap from="/velocity" to="velocity"/>
+
 		</node>
 	</group>
 	
@@ -26,8 +32,8 @@
 -->
 
 	<group ns="trivisio">
-		<node name="orientation" pkg="imu-test" type="orientation_node" output="screen" />
-		<node name="trivisio" pkg="imu-trivisio" type="imu-trivisio" output="screen" />
+		<node name="orientation" pkg="imu-test" type="orientation_node"/>
+		<node name="trivisio" pkg="imu-trivisio" type="imu-trivisio"/>
 	</group>
 	
 </launch>
